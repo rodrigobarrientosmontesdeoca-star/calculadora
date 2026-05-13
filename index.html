@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Calculadora de Huella de Carbono</title>
+<title>Huella de Carbono</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -25,14 +25,7 @@ body {
     width: 230px;
     background: #0f1a12;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
     color: white;
-}
-
-.sidebar h2 {
-    font-size: 18px;
-    margin-bottom: 20px;
 }
 
 .menu a {
@@ -41,7 +34,6 @@ body {
     color: #ccc;
     text-decoration: none;
     border-radius: 8px;
-    margin-bottom: 5px;
 }
 
 .menu a:hover {
@@ -53,68 +45,45 @@ body {
 .main {
     flex: 1;
     padding: 20px;
-    overflow-y: auto;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.user {
+    width: 40px;
+    height: 40px;
+    background: #ccc;
+    border-radius: 50%;
 }
 
 /* Cards */
-.top-cards {
+.cards {
+    margin-top: 20px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3x3 = 9 cards */
+    grid-template-columns: repeat(4, 1fr);
     gap: 15px;
 }
 
 .card {
-    background: #ffffff; /* blanco */
-    padding: 15px;
+    background: #fff;
     border-radius: 12px;
+    padding: 15px;
     color: #000;
 }
 
-.card h3 {
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.big-number {
+.big {
     font-size: 22px;
     color: #00aa55;
 }
 
-/* Charts */
-.chart-box {
-    background: #ffffff;
-    padding: 15px;
-    border-radius: 12px;
-}
-
-/* Bottom */
-.bottom {
-    margin-top: 20px;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 20px;
-}
-
-.info-box {
-    background: #ffffff;
-    padding: 15px;
-    border-radius: 12px;
-    color: #000;
-}
-
-.progress {
-    background: #ddd;
-    height: 10px;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-top: 10px;
-}
-
-.progress div {
-    height: 100%;
-    width: 21%;
-    background: #00aa55;
+canvas {
+    max-height: 180px;
 }
 </style>
 </head>
@@ -123,121 +92,113 @@ body {
 
 <div class="container">
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <h2>🌱 Anáhuac</h2>
-        <div class="menu">
-            <a href="#">Resumen</a>
-            <a href="#">Fuentes</a>
-            <a href="#">Cálculo</a>
-            <a href="#">Resultados</a>
-            <a href="#">Acciones</a>
-            <a href="#">Escenarios</a>
-            <a href="#">Reportes</a>
-            <a href="#">Historial</a> <!-- NUEVO -->
-            <a href="#">Configuración</a> <!-- NUEVO -->
-        </div>
-    </div>
-
-    <!-- Main -->
-    <div class="main">
-
-        <h1 style="color:white;">Calculadora de Huella de Carbono</h1>
-
-        <!-- 9 Cards -->
-        <div class="top-cards">
-
-            <div class="card">
-                <h3>Huella total</h3>
-                <div class="big-number">1,248.56</div>
-            </div>
-
-            <div class="card">
-                <h3>Comparación</h3>
-                <div class="big-number">-12.4%</div>
-            </div>
-
-            <div class="card">
-                <h3>Por persona</h3>
-                <div class="big-number">0.85</div>
-            </div>
-
-            <div class="card">
-                <h3>Alcance 1</h3>
-                <div class="big-number">45%</div>
-            </div>
-
-            <div class="card">
-                <h3>Alcance 2</h3>
-                <div class="big-number">35%</div>
-            </div>
-
-            <div class="card">
-                <h3>Alcance 3</h3>
-                <div class="big-number">20%</div>
-            </div>
-
-            <div class="card">
-                <h3>Energía</h3>
-                <div class="big-number">40%</div>
-            </div>
-
-            <div class="card">
-                <h3>Transporte</h3>
-                <div class="big-number">35%</div>
-            </div>
-
-            <div class="card">
-                <h3>Residuos</h3>
-                <div class="big-number">25%</div>
-            </div>
-
-        </div>
-
-        <!-- Charts -->
-        <div style="margin-top:20px; display:grid; grid-template-columns:1fr 1fr; gap:20px;">
-            <div class="chart-box">
-                <h3>Emisiones por categoría</h3>
-                <canvas id="pieChart"></canvas>
-            </div>
-
-            <div class="chart-box">
-                <h3>Tendencia</h3>
-                <canvas id="lineChart"></canvas>
-            </div>
-        </div>
-
-        <!-- Bottom -->
-        <div class="bottom">
-            <div class="info-box">
-                <h3>Análisis</h3>
-                <p>Oportunidades detectadas para reducir emisiones en transporte y energía.</p>
-            </div>
-
-            <div class="info-box">
-                <h3>Reducción</h3>
-                <div class="big-number">21.4%</div>
-                <div class="progress">
-                    <div></div>
-                </div>
-            </div>
-        </div>
-
+<!-- Sidebar -->
+<div class="sidebar">
+    <h2>🌱 Anáhuac</h2>
+    <div class="menu">
+        <a href="#">Resumen</a>
+        <a href="#">Fuentes</a>
+        <a href="#">Cálculo</a>
+        <a href="#">Resultados</a>
+        <a href="#">Acciones</a>
+        <a href="#">Escenarios</a>
+        <a href="#">Reportes</a>
+        <a href="#">Historial</a>
+        <a href="#">Configuración</a>
     </div>
 </div>
 
+<!-- Main -->
+<div class="main">
+
+    <div class="header">
+        <h1>Calculadora de Huella de Carbono</h1>
+        <div class="user"></div>
+    </div>
+
+    <div class="cards">
+
+        <!-- 1 -->
+        <div class="card">
+            <h3>Huella total</h3>
+            <div class="big">1,248.56</div>
+            <small>Mayo 2024</small>
+        </div>
+
+        <!-- 2 -->
+        <div class="card">
+            <h3>Comparación</h3>
+            <div class="big">-12.4%</div>
+        </div>
+
+        <!-- 3 -->
+        <div class="card">
+            <h3>Emisión por persona</h3>
+            <div class="big">0.85</div>
+        </div>
+
+        <!-- 4 Pie -->
+        <div class="card">
+            <h3>Alcances</h3>
+            <canvas id="alcancesPie"></canvas>
+        </div>
+
+        <!-- 5 -->
+        <div class="card">
+            <h3>Emisión por categoría</h3>
+            <canvas id="categoriaChart"></canvas>
+        </div>
+
+        <!-- 6 -->
+        <div class="card">
+            <h3>Tendencia de emisiones</h3>
+            <canvas id="lineChart"></canvas>
+        </div>
+
+        <!-- 7 -->
+        <div class="card">
+            <h3>Análisis con IA</h3>
+            <p>Reducción potencial: <b>21.4%</b></p>
+            <p>Optimizar transporte y consumo eléctrico.</p>
+        </div>
+
+        <!-- 8 -->
+        <div class="card">
+            <h3>Distribución por alcances</h3>
+            <canvas id="barChart"></canvas>
+        </div>
+
+    </div>
+
+</div>
+</div>
+
 <script>
-new Chart(document.getElementById("pieChart"), {
+// Alcances Pie
+new Chart(document.getElementById("alcancesPie"), {
+    type: 'doughnut',
+    data: {
+        labels: ["Scope 1", "Scope 2", "Scope 3"],
+        datasets: [{
+            data: [45, 35, 20],
+            backgroundColor: ["#ff6384", "#36a2eb", "#ffce56"]
+        }]
+    }
+});
+
+// Categoría Pie (colores distintos)
+new Chart(document.getElementById("categoriaChart"), {
     type: 'doughnut',
     data: {
         labels: ["Energía", "Transporte", "Residuos"],
         datasets: [{
             data: [40, 35, 25],
-            backgroundColor: ["#00aa55", "#33cc77", "#66dd99"]
+            backgroundColor: ["#8e44ad", "#e67e22", "#2ecc71"]
         }]
     }
 });
 
+// Línea
 new Chart(document.getElementById("lineChart"), {
     type: 'line',
     data: {
@@ -245,8 +206,21 @@ new Chart(document.getElementById("lineChart"), {
         datasets: [{
             label: "Emisiones",
             data: [1200, 1100, 1300, 1250, 1248],
-            borderColor: "#00aa55",
+            borderColor: "#2ecc71",
             fill: false
+        }]
+    }
+});
+
+// Barras
+new Chart(document.getElementById("barChart"), {
+    type: 'bar',
+    data: {
+        labels: ["Scope 1", "Scope 2", "Scope 3"],
+        datasets: [{
+            label: "Distribución",
+            data: [45, 35, 20],
+            backgroundColor: ["#ff6384", "#36a2eb", "#ffce56"]
         }]
     }
 });
