@@ -5,7 +5,6 @@
 <title>Calculadora de Huella de Carbono</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
@@ -13,7 +12,6 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: #0c0f0c;
-    color: #fff;
 }
 
 /* Layout */
@@ -29,6 +27,7 @@ body {
     padding: 20px;
     display: flex;
     flex-direction: column;
+    color: white;
 }
 
 .sidebar h2 {
@@ -57,45 +56,39 @@ body {
     overflow-y: auto;
 }
 
-/* Top cards */
+/* Cards */
 .top-cards {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr); /* 3x3 = 9 cards */
     gap: 15px;
 }
 
 .card {
-    background: #121a14;
+    background: #ffffff; /* blanco */
     padding: 15px;
     border-radius: 12px;
+    color: #000;
 }
 
 .card h3 {
     font-size: 14px;
-    color: #aaa;
+    color: #333;
     margin-bottom: 10px;
 }
 
 .big-number {
-    font-size: 24px;
-    color: #00ff88;
+    font-size: 22px;
+    color: #00aa55;
 }
 
-/* Charts section */
-.charts {
-    margin-top: 20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
+/* Charts */
 .chart-box {
-    background: #121a14;
+    background: #ffffff;
     padding: 15px;
     border-radius: 12px;
 }
 
-/* Bottom section */
+/* Bottom */
 .bottom {
     margin-top: 20px;
     display: grid;
@@ -104,13 +97,14 @@ body {
 }
 
 .info-box {
-    background: #121a14;
+    background: #ffffff;
     padding: 15px;
     border-radius: 12px;
+    color: #000;
 }
 
 .progress {
-    background: #1c2b1f;
+    background: #ddd;
     height: 10px;
     border-radius: 10px;
     overflow: hidden;
@@ -120,7 +114,7 @@ body {
 .progress div {
     height: 100%;
     width: 21%;
-    background: #00ff88;
+    background: #00aa55;
 }
 </style>
 </head>
@@ -140,20 +134,22 @@ body {
             <a href="#">Acciones</a>
             <a href="#">Escenarios</a>
             <a href="#">Reportes</a>
+            <a href="#">Historial</a> <!-- NUEVO -->
+            <a href="#">Configuración</a> <!-- NUEVO -->
         </div>
     </div>
 
     <!-- Main -->
     <div class="main">
 
-        <h1>Calculadora de Huella de Carbono</h1>
+        <h1 style="color:white;">Calculadora de Huella de Carbono</h1>
 
-        <!-- Top Cards -->
+        <!-- 9 Cards -->
         <div class="top-cards">
+
             <div class="card">
                 <h3>Huella total</h3>
                 <div class="big-number">1,248.56</div>
-                <small>kg CO₂</small>
             </div>
 
             <div class="card">
@@ -167,22 +163,46 @@ body {
             </div>
 
             <div class="card">
-                <h3>Alcances</h3>
-                <p>Scope 1: 45%</p>
-                <p>Scope 2: 35%</p>
-                <p>Scope 3: 20%</p>
+                <h3>Alcance 1</h3>
+                <div class="big-number">45%</div>
             </div>
+
+            <div class="card">
+                <h3>Alcance 2</h3>
+                <div class="big-number">35%</div>
+            </div>
+
+            <div class="card">
+                <h3>Alcance 3</h3>
+                <div class="big-number">20%</div>
+            </div>
+
+            <div class="card">
+                <h3>Energía</h3>
+                <div class="big-number">40%</div>
+            </div>
+
+            <div class="card">
+                <h3>Transporte</h3>
+                <div class="big-number">35%</div>
+            </div>
+
+            <div class="card">
+                <h3>Residuos</h3>
+                <div class="big-number">25%</div>
+            </div>
+
         </div>
 
         <!-- Charts -->
-        <div class="charts">
+        <div style="margin-top:20px; display:grid; grid-template-columns:1fr 1fr; gap:20px;">
             <div class="chart-box">
                 <h3>Emisiones por categoría</h3>
                 <canvas id="pieChart"></canvas>
             </div>
 
             <div class="chart-box">
-                <h3>Tendencia de emisiones</h3>
+                <h3>Tendencia</h3>
                 <canvas id="lineChart"></canvas>
             </div>
         </div>
@@ -190,13 +210,12 @@ body {
         <!-- Bottom -->
         <div class="bottom">
             <div class="info-box">
-                <h3>Análisis con IA</h3>
-                <p>Se identificaron oportunidades para reducir emisiones en transporte y energía.</p>
-                <p>Se recomienda optimizar consumo eléctrico y movilidad.</p>
+                <h3>Análisis</h3>
+                <p>Oportunidades detectadas para reducir emisiones en transporte y energía.</p>
             </div>
 
             <div class="info-box">
-                <h3>Reducción potencial</h3>
+                <h3>Reducción</h3>
                 <div class="big-number">21.4%</div>
                 <div class="progress">
                     <div></div>
@@ -208,19 +227,17 @@ body {
 </div>
 
 <script>
-// Pie Chart
 new Chart(document.getElementById("pieChart"), {
     type: 'doughnut',
     data: {
         labels: ["Energía", "Transporte", "Residuos"],
         datasets: [{
             data: [40, 35, 25],
-            backgroundColor: ["#00ff88", "#00cc66", "#00994d"]
+            backgroundColor: ["#00aa55", "#33cc77", "#66dd99"]
         }]
     }
 });
 
-// Line Chart
 new Chart(document.getElementById("lineChart"), {
     type: 'line',
     data: {
@@ -228,7 +245,7 @@ new Chart(document.getElementById("lineChart"), {
         datasets: [{
             label: "Emisiones",
             data: [1200, 1100, 1300, 1250, 1248],
-            borderColor: "#00ff88",
+            borderColor: "#00aa55",
             fill: false
         }]
     }
