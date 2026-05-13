@@ -54,10 +54,10 @@ body {
     color: white;
 }
 
-.header-left {
+.header-right {
     display: flex;
-    gap: 10px;
     align-items: center;
+    gap: 10px;
 }
 
 .select, .date {
@@ -75,7 +75,7 @@ body {
     border-radius: 50%;
 }
 
-/* Cards */
+/* Layout de filas */
 .section {
     margin-top: 20px;
     display: grid;
@@ -83,7 +83,7 @@ body {
 }
 
 .row1 {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 }
 
 .row2 {
@@ -94,6 +94,7 @@ body {
     grid-template-columns: 1fr 1fr;
 }
 
+/* Cards */
 .card {
     background: white;
     border-radius: 12px;
@@ -135,21 +136,21 @@ canvas {
 <div class="main">
 
     <div class="header">
-        <div class="header-left">
+        <h1>Calculadora de Huella de Carbono</h1>
+
+        <div class="header-right">
             <select class="select">
                 <option>Campus Norte</option>
                 <option>Campus Sur</option>
             </select>
 
             <div class="date">Mayo 2024</div>
-        </div>
 
-        <div class="user"></div>
+            <div class="user"></div>
+        </div>
     </div>
 
-    <h1 style="color:white;">Calculadora de Huella de Carbono</h1>
-
-    <!-- ROW 1 -->
+    <!-- FILA 1 -->
     <div class="section row1">
         <div class="card">
             <h3>Huella total</h3>
@@ -166,14 +167,6 @@ canvas {
             <h3>Emisión por persona</h3>
             <div class="big">0.85</div>
         </div>
-    </div>
-
-    <!-- ROW 2 -->
-    <div class="section row2">
-        <div class="card">
-            <h3>Emisión por categoría</h3>
-            <canvas id="categoriaChart"></canvas>
-        </div>
 
         <div class="card">
             <h3>Alcances</h3>
@@ -181,31 +174,32 @@ canvas {
         </div>
     </div>
 
-    <!-- ROW 3 -->
-    <div class="section row3">
+    <!-- FILA 2 -->
+    <div class="section row2">
+        <div class="card">
+            <h3>Emisión por categoría</h3>
+            <canvas id="categoriaChart"></canvas>
+        </div>
+
         <div class="card">
             <h3>Tendencia de emisiones</h3>
             <canvas id="lineChart"></canvas>
         </div>
+    </div>
 
+    <!-- FILA 3 -->
+    <div class="section row3">
         <div class="card">
             <h3>Análisis con IA</h3>
             <p><b>21.4% reducción potencial</b></p>
-            <p>Optimizar transporte y energía.</p>
+            <p>- Optimizar consumo eléctrico</p>
+            <p>- Mejorar transporte</p>
+            <p>- Reducir residuos</p>
         </div>
-    </div>
 
-    <!-- ROW 4 -->
-    <div class="section row3">
         <div class="card">
             <h3>Distribución por alcances</h3>
             <canvas id="barChart"></canvas>
-        </div>
-
-        <div class="card">
-            <h3>Sugerencias</h3>
-            <p>- Reducir consumo eléctrico</p>
-            <p>- Mejorar transporte</p>
         </div>
     </div>
 
@@ -213,6 +207,18 @@ canvas {
 </div>
 
 <script>
+// Pie Alcances
+new Chart(document.getElementById("alcancesPie"), {
+    type: 'doughnut',
+    data: {
+        labels: ["Scope 1", "Scope 2", "Scope 3"],
+        datasets: [{
+            data: [45, 35, 20],
+            backgroundColor: ["#2ecc71", "#f1c40f", "#e74c3c"]
+        }]
+    }
+});
+
 // Categoría (colores variados)
 new Chart(document.getElementById("categoriaChart"), {
     type: 'doughnut',
@@ -221,18 +227,6 @@ new Chart(document.getElementById("categoriaChart"), {
         datasets: [{
             data: [40, 35, 25],
             backgroundColor: ["#8e44ad", "#e67e22", "#3498db"]
-        }]
-    }
-});
-
-// Alcances
-new Chart(document.getElementById("alcancesPie"), {
-    type: 'doughnut',
-    data: {
-        labels: ["Scope 1", "Scope 2", "Scope 3"],
-        datasets: [{
-            data: [45, 35, 20],
-            backgroundColor: ["#2ecc71", "#f1c40f", "#e74c3c"]
         }]
     }
 });
