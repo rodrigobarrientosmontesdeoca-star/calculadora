@@ -8,30 +8,49 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
-      background-color: #f8f9fa;
-      font-family: Arial, sans-serif;
+      background-color: #f4f6f9;
+      font-family: 'Segoe UI', Arial, sans-serif;
     }
     header {
-      background-color: #004d40;
+      background-color: #1a237e;
       color: white;
       padding: 1rem;
       text-align: center;
     }
+    header h2 {
+      margin: 0;
+      font-weight: bold;
+    }
+    header p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
     .metric-card {
       background: white;
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 1rem;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       text-align: center;
     }
-    .footer {
-      margin-top: 2rem;
-      text-align: center;
+    .metric-card h6 {
       font-size: 0.9rem;
       color: #555;
     }
+    .metric-card h3 {
+      font-weight: bold;
+      color: #1a237e;
+    }
     .progress-bar {
-      background-color: #28a745;
+      background-color: #43a047;
+    }
+    .footer {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #444;
+    }
+    .footer p {
+      margin: 0.2rem 0;
     }
   </style>
 </head>
@@ -42,6 +61,7 @@
   </header>
 
   <div class="container my-4">
+    <!-- Métricas principales -->
     <div class="row g-3">
       <div class="col-md-3 col-6">
         <div class="metric-card">
@@ -71,6 +91,7 @@
       </div>
     </div>
 
+    <!-- Gráficos -->
     <div class="row my-4">
       <div class="col-md-6">
         <canvas id="pieChart"></canvas>
@@ -90,6 +111,7 @@
     </div>
   </div>
 
+  <!-- Footer -->
   <div class="footer">
     <p>Desarrollado con Inteligencia Artificial | Metodología GHG Protocol</p>
     <p>Datos confiables, decisiones inteligentes | Alineado a los ODS</p>
@@ -103,7 +125,7 @@
         labels: ['Transporte', 'Energía', 'Residuos', 'Otros'],
         datasets: [{
           data: [400, 300, 200, 348.56],
-          backgroundColor: ['#00796b','#43a047','#fbc02d','#e64a19']
+          backgroundColor: ['#1a237e','#43a047','#fbc02d','#e64a19']
         }]
       }
     });
@@ -116,8 +138,9 @@
         datasets: [{
           label: 'Emisiones',
           data: [1400, 1350, 1300, 1250, 1248.56],
-          borderColor: '#00796b',
-          fill: false
+          borderColor: '#1a237e',
+          fill: false,
+          tension: 0.3
         }]
       }
     });
@@ -130,7 +153,7 @@
         datasets: [{
           label: 'tCO₂e',
           data: [300, 450, 498.56],
-          backgroundColor: ['#00796b','#43a047','#fbc02d']
+          backgroundColor: ['#1a237e','#43a047','#fbc02d']
         }]
       }
     });
