@@ -8,11 +8,12 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
-      background-color: #f4f6f9;
+      background-color: #ffffff; /* Fondo blanco */
       font-family: 'Segoe UI', Arial, sans-serif;
+      color: #333333; /* Texto gris oscuro */
     }
     header {
-      background-color: #1a237e; /* Azul oscuro */
+      background-color: #f57c00; /* Naranja institucional */
       color: white;
       padding: 1rem;
       text-align: center;
@@ -26,7 +27,7 @@
       font-size: 0.9rem;
     }
     .metric-card {
-      background: white;
+      background: #fafafa;
       border-radius: 10px;
       padding: 1rem;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -34,11 +35,11 @@
     }
     .metric-card h6 {
       font-size: 0.9rem;
-      color: #555;
+      color: #666;
     }
     .metric-card h3 {
       font-weight: bold;
-      color: #1a237e;
+      color: #f57c00; /* Naranja */
     }
     .progress-bar {
       background-color: #43a047; /* Verde */
@@ -53,7 +54,7 @@
       margin: 0.2rem 0;
     }
     .btn-guia {
-      background-color: #1a237e;
+      background-color: #f57c00;
       color: white;
       border-radius: 8px;
       padding: 0.6rem 1.2rem;
@@ -62,7 +63,7 @@
       font-weight: bold;
     }
     .btn-guia:hover {
-      background-color: #3949ab;
+      background-color: #ef6c00;
     }
   </style>
 </head>
@@ -142,7 +143,7 @@
         labels: ['Transporte', 'Energía', 'Residuos', 'Otros'],
         datasets: [{
           data: [400, 300, 200, 348.56],
-          backgroundColor: ['#1a237e','#43a047','#fbc02d','#e64a19']
+          backgroundColor: ['#f57c00','#43a047','#fbc02d','#e64a19']
         }]
       }
     });
@@ -155,7 +156,7 @@
         datasets: [{
           label: 'Emisiones',
           data: [1400, 1350, 1300, 1250, 1248.56],
-          borderColor: '#1a237e',
+          borderColor: '#f57c00',
           fill: false,
           tension: 0.3
         }]
@@ -170,7 +171,7 @@
         datasets: [{
           label: 'tCO₂e',
           data: [300, 450, 498.56],
-          backgroundColor: ['#1a237e','#43a047','#fbc02d']
+          backgroundColor: ['#f57c00','#43a047','#fbc02d']
         }]
       }
     });
