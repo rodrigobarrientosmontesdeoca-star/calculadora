@@ -12,7 +12,7 @@
       font-family: 'Segoe UI', Arial, sans-serif;
     }
     header {
-      background-color: #1a237e;
+      background-color: #1a237e; /* Azul oscuro */
       color: white;
       padding: 1rem;
       text-align: center;
@@ -41,7 +41,7 @@
       color: #1a237e;
     }
     .progress-bar {
-      background-color: #43a047;
+      background-color: #43a047; /* Verde */
     }
     .footer {
       margin-top: 2rem;
@@ -51,6 +51,18 @@
     }
     .footer p {
       margin: 0.2rem 0;
+    }
+    .btn-guia {
+      background-color: #1a237e;
+      color: white;
+      border-radius: 8px;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    .btn-guia:hover {
+      background-color: #3949ab;
     }
   </style>
 </head>
@@ -108,6 +120,11 @@
         <canvas id="barChart"></canvas>
         <p class="text-center">Distribución por alcances</p>
       </div>
+    </div>
+
+    <!-- Botón de guía -->
+    <div class="text-center">
+      <button class="btn-guia">Guía de uso</button>
     </div>
   </div>
 
