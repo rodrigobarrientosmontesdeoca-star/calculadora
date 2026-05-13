@@ -10,19 +10,18 @@
 <style>
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: Arial;
     background: #0c0f0c;
 }
 
-/* Layout */
 .container {
     display: flex;
-    height: 100vh;
 }
 
 /* Sidebar */
 .sidebar {
     width: 230px;
+    height: 100vh;
     background: #0f1a12;
     padding: 20px;
     color: white;
@@ -55,6 +54,20 @@ body {
     color: white;
 }
 
+.header-left {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.select, .date {
+    background: #1c2b1f;
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: white;
+    border: none;
+}
+
 .user {
     width: 40px;
     height: 40px;
@@ -63,18 +76,28 @@ body {
 }
 
 /* Cards */
-.cards {
+.section {
     margin-top: 20px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
     gap: 15px;
 }
 
+.row1 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.row2 {
+    grid-template-columns: 2fr 1fr;
+}
+
+.row3 {
+    grid-template-columns: 1fr 1fr;
+}
+
 .card {
-    background: #fff;
+    background: white;
     border-radius: 12px;
     padding: 15px;
-    color: #000;
 }
 
 .big {
@@ -83,7 +106,7 @@ body {
 }
 
 canvas {
-    max-height: 180px;
+    max-height: 200px;
 }
 </style>
 </head>
@@ -112,88 +135,104 @@ canvas {
 <div class="main">
 
     <div class="header">
-        <h1>Calculadora de Huella de Carbono</h1>
+        <div class="header-left">
+            <select class="select">
+                <option>Campus Norte</option>
+                <option>Campus Sur</option>
+            </select>
+
+            <div class="date">Mayo 2024</div>
+        </div>
+
         <div class="user"></div>
     </div>
 
-    <div class="cards">
+    <h1 style="color:white;">Calculadora de Huella de Carbono</h1>
 
-        <!-- 1 -->
+    <!-- ROW 1 -->
+    <div class="section row1">
         <div class="card">
             <h3>Huella total</h3>
             <div class="big">1,248.56</div>
             <small>Mayo 2024</small>
         </div>
 
-        <!-- 2 -->
         <div class="card">
             <h3>Comparación</h3>
             <div class="big">-12.4%</div>
         </div>
 
-        <!-- 3 -->
         <div class="card">
             <h3>Emisión por persona</h3>
             <div class="big">0.85</div>
         </div>
+    </div>
 
-        <!-- 4 Pie -->
-        <div class="card">
-            <h3>Alcances</h3>
-            <canvas id="alcancesPie"></canvas>
-        </div>
-
-        <!-- 5 -->
+    <!-- ROW 2 -->
+    <div class="section row2">
         <div class="card">
             <h3>Emisión por categoría</h3>
             <canvas id="categoriaChart"></canvas>
         </div>
 
-        <!-- 6 -->
+        <div class="card">
+            <h3>Alcances</h3>
+            <canvas id="alcancesPie"></canvas>
+        </div>
+    </div>
+
+    <!-- ROW 3 -->
+    <div class="section row3">
         <div class="card">
             <h3>Tendencia de emisiones</h3>
             <canvas id="lineChart"></canvas>
         </div>
 
-        <!-- 7 -->
         <div class="card">
             <h3>Análisis con IA</h3>
-            <p>Reducción potencial: <b>21.4%</b></p>
-            <p>Optimizar transporte y consumo eléctrico.</p>
+            <p><b>21.4% reducción potencial</b></p>
+            <p>Optimizar transporte y energía.</p>
         </div>
+    </div>
 
-        <!-- 8 -->
+    <!-- ROW 4 -->
+    <div class="section row3">
         <div class="card">
             <h3>Distribución por alcances</h3>
             <canvas id="barChart"></canvas>
         </div>
 
+        <div class="card">
+            <h3>Sugerencias</h3>
+            <p>- Reducir consumo eléctrico</p>
+            <p>- Mejorar transporte</p>
+        </div>
     </div>
 
 </div>
 </div>
 
 <script>
-// Alcances Pie
-new Chart(document.getElementById("alcancesPie"), {
-    type: 'doughnut',
-    data: {
-        labels: ["Scope 1", "Scope 2", "Scope 3"],
-        datasets: [{
-            data: [45, 35, 20],
-            backgroundColor: ["#ff6384", "#36a2eb", "#ffce56"]
-        }]
-    }
-});
-
-// Categoría Pie (colores distintos)
+// Categoría (colores variados)
 new Chart(document.getElementById("categoriaChart"), {
     type: 'doughnut',
     data: {
         labels: ["Energía", "Transporte", "Residuos"],
         datasets: [{
             data: [40, 35, 25],
-            backgroundColor: ["#8e44ad", "#e67e22", "#2ecc71"]
+            backgroundColor: ["#8e44ad", "#e67e22", "#3498db"]
+        }]
+    }
+});
+
+// Alcances
+new Chart(document.getElementById("alcancesPie"), {
+    type: 'doughnut',
+    data: {
+        labels: ["Scope 1", "Scope 2", "Scope 3"],
+        datasets: [{
+            data: [45, 35, 20],
+            backgroundColor: ["#2ecc71", "#f1c40f", "#e74c3c"]
         }]
     }
 });
@@ -204,7 +243,6 @@ new Chart(document.getElementById("lineChart"), {
     data: {
         labels: ["Ene", "Feb", "Mar", "Abr", "May"],
         datasets: [{
-            label: "Emisiones",
             data: [1200, 1100, 1300, 1250, 1248],
             borderColor: "#2ecc71",
             fill: false
@@ -218,9 +256,8 @@ new Chart(document.getElementById("barChart"), {
     data: {
         labels: ["Scope 1", "Scope 2", "Scope 3"],
         datasets: [{
-            label: "Distribución",
             data: [45, 35, 20],
-            backgroundColor: ["#ff6384", "#36a2eb", "#ffce56"]
+            backgroundColor: ["#2ecc71", "#3498db", "#9b59b6"]
         }]
     }
 });
