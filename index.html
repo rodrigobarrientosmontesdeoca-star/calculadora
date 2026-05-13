@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Huella de Carbono</title>
+<title>Calculadora de Huella de Carbono</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -75,35 +75,59 @@ body {
     border-radius: 50%;
 }
 
-/* Layout de filas */
+/* Layout */
 .section {
     margin-top: 20px;
     display: grid;
     gap: 15px;
 }
 
-.row1 {
-    grid-template-columns: repeat(4, 1fr);
-}
-
-.row2 {
-    grid-template-columns: 2fr 1fr;
-}
-
-.row3 {
-    grid-template-columns: 1fr 1fr;
-}
+.row1 { grid-template-columns: repeat(4, 1fr); }
+.row2 { grid-template-columns: 2fr 1fr; }
+.row3 { grid-template-columns: 1fr 1fr; }
 
 /* Cards */
 .card {
-    background: white;
-    border-radius: 12px;
-    padding: 15px;
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.big {
-    font-size: 22px;
-    color: #00aa55;
+.small { min-height: 130px; }
+.medium { min-height: 200px; }
+.large { min-height: 260px; }
+
+.card h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.value {
+    font-size: 34px;
+    font-weight: 700;
+    color: #2e7d32;
+}
+
+.value-negative {
+    font-size: 32px;
+    font-weight: 700;
+    color: #2e7d32;
+}
+
+.subtext {
+    font-size: 13px;
+    color: #777;
+}
+
+.green-text {
+    font-size: 13px;
+    color: #2e7d32;
 }
 
 canvas {
@@ -124,7 +148,7 @@ canvas {
         <a href="#">Fuentes</a>
         <a href="#">Cálculo</a>
         <a href="#">Resultados</a>
-        <a href="#">Acciones</a>
+        <a href="#">Análisis IA</a>
         <a href="#">Escenarios</a>
         <a href="#">Reportes</a>
         <a href="#">Historial</a>
@@ -143,103 +167,122 @@ canvas {
                 <option>Campus Norte</option>
                 <option>Campus Sur</option>
             </select>
-
             <div class="date">Mayo 2024</div>
-
             <div class="user"></div>
         </div>
     </div>
 
     <!-- FILA 1 -->
     <div class="section row1">
-        <div class="card">
-            <h3>Huella total</h3>
-            <div class="big">1,248.56</div>
-            <small>Mayo 2024</small>
+
+        <div class="card small">
+            <h3>Huella total (tCO₂e)</h3>
+            <div class="value">1,248.56</div>
+            <div class="subtext">Mayo 2024</div>
         </div>
 
-        <div class="card">
-            <h3>Comparación</h3>
-            <div class="big">-12.4%</div>
+        <div class="card small">
+            <h3>Comparado con abril</h3>
+            <div class="value-negative">-12.4%</div>
+            <div class="green-text">Reducción de emisiones</div>
         </div>
 
-        <div class="card">
-            <h3>Emisión por persona</h3>
-            <div class="big">0.85</div>
+        <div class="card small">
+            <h3>Emisiones por persona</h3>
+            <div class="value">0.85</div>
+            <div class="subtext">tCO₂e / persona</div>
         </div>
 
-        <div class="card">
-            <h3>Alcances</h3>
+        <div class="card small">
+            <h3>Alcance 1, 2 y 3</h3>
             <canvas id="alcancesPie"></canvas>
         </div>
+
     </div>
 
     <!-- FILA 2 -->
     <div class="section row2">
-        <div class="card">
-            <h3>Emisión por categoría</h3>
+
+        <div class="card large">
+            <h3>Emisiones por categoría</h3>
+            <div class="subtext">tCO₂e - Mayo 2024</div>
             <canvas id="categoriaChart"></canvas>
         </div>
 
-        <div class="card">
+        <div class="card large">
             <h3>Tendencia de emisiones</h3>
+            <div class="subtext">tCO₂e</div>
             <canvas id="lineChart"></canvas>
         </div>
+
     </div>
 
     <!-- FILA 3 -->
     <div class="section row3">
-        <div class="card">
+
+        <div class="card medium">
             <h3>Análisis con IA</h3>
-            <p><b>21.4% reducción potencial</b></p>
-            <p>- Optimizar consumo eléctrico</p>
-            <p>- Mejorar transporte</p>
-            <p>- Reducir residuos</p>
+
+            <p class="subtext">
+            Nuestra IA ha analizado tus datos y detectó las siguientes oportunidades de mejora:
+            </p>
+
+            <ul style="font-size:13px; color:#444; padding-left:15px;">
+                <li>Optimiza el consumo energético en edificios académicos</li>
+                <li>Mejora la gestión de residuos orgánicos</li>
+                <li>Promueve el uso de transporte sostenible</li>
+            </ul>
+
+            <div class="value" style="font-size:28px;">21.4%</div>
+            <div class="subtext">Equivalente a 267.3 tCO₂e menos al mes</div>
         </div>
 
-        <div class="card">
+        <div class="card medium">
             <h3>Distribución por alcances</h3>
+            <div class="subtext">tCO₂e - Mayo 2024</div>
             <canvas id="barChart"></canvas>
         </div>
+
     </div>
 
 </div>
 </div>
 
 <script>
-// Pie Alcances
+// Alcances
 new Chart(document.getElementById("alcancesPie"), {
     type: 'doughnut',
     data: {
-        labels: ["Scope 1", "Scope 2", "Scope 3"],
+        labels: ["Alcance 1", "Alcance 2", "Alcance 3"],
         datasets: [{
             data: [45, 35, 20],
-            backgroundColor: ["#2ecc71", "#f1c40f", "#e74c3c"]
+            backgroundColor: ["#2ecc71", "#3498db", "#9b59b6"]
         }]
     }
 });
 
-// Categoría (colores variados)
+// Categoría
 new Chart(document.getElementById("categoriaChart"), {
     type: 'doughnut',
     data: {
-        labels: ["Energía", "Transporte", "Residuos"],
+        labels: ["Energía eléctrica", "Transporte", "Residuos"],
         datasets: [{
-            data: [40, 35, 25],
-            backgroundColor: ["#8e44ad", "#e67e22", "#3498db"]
+            data: [42, 25, 15],
+            backgroundColor: ["#27ae60", "#e67e22", "#2980b9"]
         }]
     }
 });
 
-// Línea
+// Tendencia
 new Chart(document.getElementById("lineChart"), {
     type: 'line',
     data: {
         labels: ["Ene", "Feb", "Mar", "Abr", "May"],
         datasets: [{
-            data: [1200, 1100, 1300, 1250, 1248],
+            data: [1200, 1000, 1300, 1100, 1248],
             borderColor: "#2ecc71",
-            fill: false
+            fill: true,
+            backgroundColor: "rgba(46,125,50,0.1)"
         }]
     }
 });
@@ -248,9 +291,9 @@ new Chart(document.getElementById("lineChart"), {
 new Chart(document.getElementById("barChart"), {
     type: 'bar',
     data: {
-        labels: ["Scope 1", "Scope 2", "Scope 3"],
+        labels: ["Alcance 1", "Alcance 2", "Alcance 3"],
         datasets: [{
-            data: [45, 35, 20],
+            data: [224, 524, 499],
             backgroundColor: ["#2ecc71", "#3498db", "#9b59b6"]
         }]
     }
